@@ -1,0 +1,53 @@
+
+.text-display {
+  padding: 20px;
+  background-color: #f0f0f0;
+  min-height: 150px;
+}
+
+.text-output {
+  white-space: pre-wrap;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  min-height: 50px;
+}
+
+.text-editor {
+  padding: 10px;
+  background-color: #e0e0e0;
+  border: none;
+  
+}
+
+.text-editor textarea {
+  width: 90%;
+  height: 100px;
+  font-size: 1rem;
+  padding: 10px;
+  font-family: monospace;
+  border: none;
+}
+
+.virtual-keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
+  background-color: #ddd;
+  max-width: 700px;
+}
+
+.virtual-keyboard button {
+  font-size: 1.2rem;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.virtual-keyboard button:hover {
+  background-color: #eee;
+}
