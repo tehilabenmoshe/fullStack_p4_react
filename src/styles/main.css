@@ -51,3 +51,18 @@
 .virtual-keyboard button:hover {
   background-color: #eee;
 }
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: black;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
