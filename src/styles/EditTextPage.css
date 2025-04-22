@@ -1,0 +1,111 @@
+
+.text-title {
+    font-family: 'arial', sans-serif; 
+    color: #137083;               
+    font-size: 1.5rem;             
+    margin-bottom: 10px;
+  }
+  
+
+.text-display {
+    padding: 20px;
+    background-color: #f0f0f0;
+    min-height: 150px;
+  }
+  
+  .text-output {
+    white-space: pre-wrap;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    font-family: arial, sans-serif;
+    min-height: 50px;
+  }
+  
+  .text-editor {
+    padding: 10px;
+    background-color: #e0e0e0;
+    border: none;
+    
+  }
+  
+  .text-editor textarea {
+    width: 90%;
+    height: 100px;
+    font-size: 1rem;
+    padding: 10px;
+    font-family: monospace;
+    border: none;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: none;
+  }
+  
+  .virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 10px;
+    background-color: #ddd;
+    max-width: 700px;
+  }
+  
+  .virtual-keyboard button {
+    font-size: 1.2rem;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.2s;
+  }
+  
+  .virtual-keyboard button:hover {
+    background-color: #eee;
+    border: none;
+  }
+  
+  .cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background-color: black;
+    animation: blink 1s steps(2, start) infinite;
+    vertical-align: bottom;
+  }
+  
+  .file-actions {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  .file-actions input {
+    padding: 8px;
+    font-size: 1rem;
+  }
+  
+  .file-actions button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #137083;
+    transition: background-color 0.2s;
+    color:white;
+  }
+  
+  .file-actions button:hover {
+    background-color: #eee;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  

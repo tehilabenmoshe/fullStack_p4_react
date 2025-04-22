@@ -2,36 +2,47 @@ import React, { useState } from 'react';
 import TextDisplay from '../components/TextDisplay';
 import TextEditor from '../components/TextEditor';
 import VirtualKeyboard from '../components/VirtualKeyboard';
+import '../styles/EditTextPage.css';
 
-import '../styles/main.css';
 
-
-const EditorPage = () => {
+const EditTextPage = ({ username }) => {
   const [text, setText] = useState('');
   const [cursorPosition, setCursorPosition] = useState(0);
   const [fileName, setFileName] = useState('');
 
   const handleSave = () => {
-    if (fileName) {
-      localStorage.setItem(fileName, text);
-      alert('Saved!');
-    } else {
+    if (!fileName) {
       alert('Please enter a file name.');
+      return;
     }
+  
+    const users = JSON.parse(localStorage.getItem('users'));
+    if (!users[username].files) {
+      users[username].files = {};
+    }
+  
+    users[username].files[fileName] = text;
+    localStorage.setItem('users', JSON.stringify(users));
+    alert('Saved!');
   };
+  
 
   const handleLoad = () => {
-    if (fileName) {
-      const saved = localStorage.getItem(fileName);
-      if (saved !== null) {
-        setText(saved);
-      } else {
-        alert('File not found.');
-      }
-    } else {
+    if (!fileName) {
       alert('Please enter a file name.');
+      return;
+    }
+  
+    const users = JSON.parse(localStorage.getItem('users'));
+    const saved = users[username]?.files?.[fileName];
+  
+    if (saved !== undefined) {
+      setText(saved);
+    } else {
+      alert('File not found.');
     }
   };
+  
   
     return (
       <div>
@@ -64,4 +75,4 @@ const EditorPage = () => {
   };
 
 
-export default EditorPage;
+export default EditTextPage;
