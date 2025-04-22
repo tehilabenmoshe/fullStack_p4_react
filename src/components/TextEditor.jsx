@@ -1,6 +1,8 @@
 
 import React, { useRef, useEffect } from 'react';
+import GraphemeSplitter from 'grapheme-splitter';
 import '../styles/main.css';
+const splitter = new GraphemeSplitter();
 
 const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children }) => {
   const textareaRef = useRef(null);
@@ -20,14 +22,18 @@ const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children
     let newPos = cursorPosition;
 
     if (char === 'BACKSPACE') {
-      // מחיקה של תו לפני הסמן
       if (cursorPosition > 0) {
-        updatedText = text.slice(0, cursorPosition - 1) + text.slice(cursorPosition);
-        newPos = cursorPosition - 1;
+      // חשבי את המיקום ב־graphemes
+      const leftPart = splitter.splitGraphemes(text.slice(0, cursorPosition));
+      const rightPart = splitter.splitGraphemes(text.slice(cursorPosition));
+
+      leftPart.pop(); // מוחק תו שלם (גם אימוג'י)
+
+      updatedText = leftPart.join('') + rightPart.join('');
+      newPos = leftPart.join('').length;
       } else {
         return;
       }
-    // הוספת תו במיקום הסמן
     } else {
       updatedText = text.slice(0, cursorPosition) + char + text.slice(cursorPosition);
       newPos = cursorPosition + char.length;

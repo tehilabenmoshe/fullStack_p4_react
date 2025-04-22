@@ -98,6 +98,29 @@
     transition: background-color 0.2s;
     color:white;
   }
+
+  .keyboard-controls {
+    margin: 10px 0;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .keyboard-controls button {
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .language-toggle {
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 0.2s ease, cursor 0.2s ease;
+  }
+  
+  .language-toggle.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   
   .file-actions button:hover {
     background-color: #eee;

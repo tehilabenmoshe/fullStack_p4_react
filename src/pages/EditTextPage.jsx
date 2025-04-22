@@ -9,6 +9,9 @@ const EditTextPage = ({ username }) => {
   const [text, setText] = useState('');
   const [cursorPosition, setCursorPosition] = useState(0);
   const [fileName, setFileName] = useState('');
+  const [language, setLanguage] = useState('EN'); // EN or HE
+  const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
+  const [prevLanguageBeforeEmoji, setPrevLanguageBeforeEmoji] = useState('EN');
 
   const handleSave = () => {
     if (!fileName) {
@@ -35,20 +38,36 @@ const EditTextPage = ({ username }) => {
   
     const users = JSON.parse(localStorage.getItem('users'));
     const saved = users[username]?.files?.[fileName];
-  
     if (saved !== undefined) {
       setText(saved);
     } else {
       alert('File not found.');
     }
   };
+
+  const toggleLanguage = () => {
+    setLanguage(prev => (prev === 'EN' ? 'HE' : 'EN'));
+  };
+
+  const toggleEmojiKeyboard = () => {
+    if (showEmojiKeyboard) {
+      setShowEmojiKeyboard(false);
+      setLanguage(prevLanguageBeforeEmoji);
+    } else {
+      setPrevLanguageBeforeEmoji(language);
+      setShowEmojiKeyboard(true);
+    }
+  };
   
   
-    return (
-      <div>
-        <TextDisplay text={text} cursorPosition={cursorPosition}/>
-        
-        <TextEditor
+  return (
+    <div>
+      <TextDisplay 
+        text={text} 
+        cursorPosition={cursorPosition}
+      />
+  
+      <TextEditor
         text={text}
         setText={setText}
         cursorPosition={cursorPosition}
@@ -56,7 +75,27 @@ const EditTextPage = ({ username }) => {
       >
         {(insertCharAtCursor) => (
           <>
-            <VirtualKeyboard onCharClick={insertCharAtCursor} />
+            <div className="toolbar">
+              <button
+                onClick={toggleEmojiKeyboard}>
+                {showEmojiKeyboard ? '⌨️ חזרה' : '😊 אימוג׳ים'}
+              </button>
+  
+              <button
+                onClick={toggleLanguage}
+                disabled={showEmojiKeyboard}
+                className={`language-toggle ${showEmojiKeyboard ? 'disabled' : ''}`}
+              >
+                {language === 'EN' ? 'עברית' : 'English'}
+              </button>
+            </div>
+  
+            <VirtualKeyboard
+              onCharClick={insertCharAtCursor}
+              language={language}
+              showEmojis={showEmojiKeyboard}
+            />
+  
             <div className="file-actions">
               <input
                 type="text"
@@ -64,15 +103,15 @@ const EditTextPage = ({ username }) => {
                 onChange={(e) => setFileName(e.target.value)}
                 placeholder="Enter file name"
               />
-              <button onClick={() => handleSave()}>Save</button>
-              <button onClick={() => handleLoad()}>Open</button>
+              <button onClick={handleSave}>Save</button>
+              <button onClick={handleLoad}>Open</button>
             </div>
           </>
         )}
       </TextEditor>
-      </div>
-    );
-  };
-
+    </div>
+  );
+  
+};
 
 export default EditTextPage;
