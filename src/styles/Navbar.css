@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap?family=Geologica:wght@100..900&" );
+
+
+.navbar {
+    font-family: 'Geologica';
+    width: 100vw;
+    position: relative; /* או fixed אם את רוצה שהוא יישאר תמיד למעלה */
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    box-sizing: border-box; /* חשוב כדי שה-padding לא יחרוג מה־100vw */
+    color: #7d4eb6;
+    z-index: 999;
+    
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .username {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  .logout-btn {
+    padding: 6px 12px;
+    background-color: #ff6b6b;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  

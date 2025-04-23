@@ -1,26 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import React from 'react';
-import EditorPage from './pages/EditTextPage';
+import EditorTextPage from './pages/EditTextPage';
 import { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage'
+import Navbar from './components/Navbar'
 
-
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div className="App">
-//         <EditorPage />
-       
-//       </div>
-      
-//     </>
-//   )
-// }
-
-// export default App
 
 function App() {
   const [username, setUsername] = useState('');
@@ -37,16 +21,19 @@ function App() {
     setUsername('');
   };
 
-  if (!localStorage.getItem('currentUser')) {
-    return <LoginPage setUsername={setUsername} />;
-  }
+ 
 
   return (
     <div className="App">
-      <button className="logout-btn" onClick={handleLogout}>Logout</button>
-      <EditorPage username={username} />
+      <Navbar username={username} onLogout={handleLogout} />
+      {!username ? (
+        <LoginPage setUsername={setUsername} />
+      ) : (
+        <EditorTextPage username={username} />
+      )}
     </div>
   );
+  
 }
 
 export default App;

@@ -61,56 +61,63 @@ const EditTextPage = ({ username }) => {
   
   
   return (
-    <div>
-      <TextDisplay 
-        text={text} 
-        cursorPosition={cursorPosition}
-      />
+    <div className="edit-text-page">
   
-      <TextEditor
-        text={text}
-        setText={setText}
-        cursorPosition={cursorPosition}
-        setCursorPosition={setCursorPosition}
-      >
-        {(insertCharAtCursor) => (
-          <>
-            <div className="toolbar">
-              <button
-                onClick={toggleEmojiKeyboard}>
-                {showEmojiKeyboard ? '⌨️ חזרה' : '😊 אימוג׳ים'}
-              </button>
+      {/* Text display and text area in one section */}
+      <div className="text-area-container">
+        <TextDisplay 
+          text={text} 
+          cursorPosition={cursorPosition}
+        />
   
-              <button
-                onClick={toggleLanguage}
-                disabled={showEmojiKeyboard}
-                className={`language-toggle ${showEmojiKeyboard ? 'disabled' : ''}`}
-              >
-                {language === 'EN' ? 'עברית' : 'English'}
-              </button>
-            </div>
+        <TextEditor
+          text={text}
+          setText={setText}
+          cursorPosition={cursorPosition}
+          setCursorPosition={setCursorPosition}
+        />
+      </div>
   
-            <VirtualKeyboard
-              onCharClick={insertCharAtCursor}
-              language={language}
-              showEmojis={showEmojiKeyboard}
-            />
+      {/* Controls and virtual keyboard section */}
+      <div className="keyboard-area">
+        <div className="toolbar">
+          <button onClick={toggleEmojiKeyboard}>
+            {showEmojiKeyboard ? '⌨️ חזרה' : '😊 אימוג׳ים'}
+          </button>
   
-            <div className="file-actions">
-              <input
-                type="text"
-                value={fileName}
-                onChange={(e) => setFileName(e.target.value)}
-                placeholder="Enter file name"
-              />
-              <button onClick={handleSave}>Save</button>
-              <button onClick={handleLoad}>Open</button>
-            </div>
-          </>
-        )}
-      </TextEditor>
+          <button
+            onClick={toggleLanguage}
+            disabled={showEmojiKeyboard}
+            className={`language-toggle ${showEmojiKeyboard ? 'disabled' : ''}`}
+          >
+            {language === 'EN' ? 'עברית' : 'English'}
+          </button>
+        </div>
+  
+        <VirtualKeyboard
+          onCharClick={(char) => {
+            const updatedText = text.slice(0, cursorPosition) + char + text.slice(cursorPosition);
+            setText(updatedText);
+            setCursorPosition(cursorPosition + char.length);
+          }}
+          language={language}
+          showEmojis={showEmojiKeyboard}
+        />
+  
+        <div className="file-actions">
+          <input
+            type="text"
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
+            placeholder="Enter file name"
+          />
+          <button onClick={handleSave}>Save</button>
+          <button onClick={handleLoad}>Open</button>
+        </div>
+      </div>
     </div>
   );
+  
   
 };
 

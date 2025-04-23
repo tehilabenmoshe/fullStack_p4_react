@@ -1,7 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
 import GraphemeSplitter from 'grapheme-splitter';
-import '../styles/main.css';
 const splitter = new GraphemeSplitter();
 
 const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children }) => {
@@ -73,7 +72,7 @@ const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children
       ></textarea>
 
       {/* העברת הפונקציה למקלדת */}
-      {children(insertCharAtCursor)}
+      {children}
     </div>
   );
 };

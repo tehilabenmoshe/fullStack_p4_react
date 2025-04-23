@@ -30,27 +30,47 @@ const LoginPage = ({ setUsername }) => {
   };
 
   return (
-    <div className="login-box">
-      <h2>{isRegistered ? 'Login' : 'Register'}</h2>
-      <input
-        type="text"
-        placeholder="Enter your username"
-        value={inputName}
-        onChange={(e) => setInputName(e.target.value)}
-      />
-      {isRegistered ? (
-        <button onClick={handleLogin}>Login</button>
-      ) : (
-        <button onClick={handleRegister}>Register</button>
-      )}
-      <p>
-        {isRegistered ? "Don't have an account?" : 'Already registered?'}{' '}
-        <button className="link-btn" onClick={() => setIsRegistered(!isRegistered)}>
-          {isRegistered ? 'Register here' : 'Login here'}
-        </button>
-      </p>
+    <div className="login-wrapper">
+      <div className="hero-section">
+        <h3 className="main-title">
+          The rich <span className="highlight">text editor </span> for <br />
+          every use case
+        </h3>
+
+        <button className="register-btn1">Register now!</button>
+      </div>
+
+      
+     
+      <div className="login-box">
+        <h2>{isRegistered ? 'Login' : 'Register'}</h2>
+        <input
+          type="text"
+          placeholder="username"
+          value={inputName}
+          onChange={(e) => setInputName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="password"
+          value={inputName}
+          onChange={(e) => setInputName(e.target.value)}
+        />
+        {isRegistered ? (
+          <button className="login-btn"onClick={handleLogin}>Login</button>
+        ) : (
+          <button onClick={handleRegister}>Register</button>
+        )}
+        <p>
+          {isRegistered ? "Don't have an account?" : 'Already registered?'}{' '}
+          <button className="link-btn" onClick={() => setIsRegistered(!isRegistered)}>
+            {isRegistered ? 'Register here' : 'Login here'}
+          </button>
+        </p>
+      </div>
     </div>
   );
+  
 };
 
 export default LoginPage;
