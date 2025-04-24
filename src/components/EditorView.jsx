@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import TextDisplay from '../components/TextDisplay';
 import TextEditor from '../components/TextEditor';
 import VirtualKeyboard from '../components/VirtualKeyboard';
-import '../styles/EditTextPage.css';
+import '../styles/EditorView.css';
 
 
-const EditTextPage = ({ username }) => {
+const EditorView = ({ username }) => {
   const [text, setText] = useState('');
   const [cursorPosition, setCursorPosition] = useState(0);
   const [fileName, setFileName] = useState('');
@@ -121,4 +121,4 @@ const EditTextPage = ({ username }) => {
   
 };
 
-export default EditTextPage;
+export default EditorView;

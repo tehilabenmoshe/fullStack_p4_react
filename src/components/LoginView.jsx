@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/LoginPage.css';
+import '../styles/LoginView.css';
 
-const LoginPage = ({ setUsername }) => {
+const LoginView  = ({ setUsername }) => {
   const [inputName, setInputName] = useState('');
   const [isRegistered, setIsRegistered] = useState(true);
 
@@ -40,8 +40,6 @@ const LoginPage = ({ setUsername }) => {
         <button className="register-btn1">Register now!</button>
       </div>
 
-      
-     
       <div className="login-box">
         <h2>{isRegistered ? 'Login' : 'Register'}</h2>
         <input
@@ -50,12 +48,7 @@ const LoginPage = ({ setUsername }) => {
           value={inputName}
           onChange={(e) => setInputName(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="password"
-          value={inputName}
-          onChange={(e) => setInputName(e.target.value)}
-        />
+        
         {isRegistered ? (
           <button className="login-btn"onClick={handleLogin}>Login</button>
         ) : (
@@ -73,4 +66,4 @@ const LoginPage = ({ setUsername }) => {
   
 };
 
-export default LoginPage;
+export default LoginView ;
