@@ -1,20 +1,21 @@
 import React from 'react';
+import '../styles/VirtualKeyboard.css';
 
 
 //const characters = ['😊','⬅️','1','2','3','4','5','6','7','8','9','0', 'A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
 const keyboards = {
-  EN: ['⬅️', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'],
-  HE: ['⬅️', 'א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת'],
-  EMOJI: ['⬅️', '😊','😂','😍','👍','🔥','🎉','🙌','💡','🥳','😎','❤️','🤔','💻']
+  EN: ['⬅️', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE'],
+  HE: ['⬅️', 'א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת','SPACE'],
+  EMOJI: ['⬅️', '😊','😂','😍','👍','🔥','🎉','🙌','💡','🥳','😎','❤️','🤔','💻','SPACE']
 };
 
 const VirtualKeyboard = ({ onCharClick, language = 'EN', showEmojis = false }) => {
   const layout = showEmojis ? keyboards.EMOJI : keyboards[language];
 
   const handleClick = (char) => {
-    if (char === '⬅️') {
-      onCharClick('BACKSPACE');
+    if (char === 'SPACE') {
+      onCharClick(' ');;
     } else {
       onCharClick(char);
     }
@@ -23,10 +24,15 @@ const VirtualKeyboard = ({ onCharClick, language = 'EN', showEmojis = false }) =
   return (
     <div className="virtual-keyboard">
       {layout.map((char, idx) => (
-        <button key={idx} onClick={() => handleClick(char)}>
-          {char}
+        <button
+          key={idx}
+          className={char === 'SPACE' ? 'space-button' : ''}
+          onClick={() => handleClick(char)}
+        >
+          {char === 'SPACE' ? ' ' : char}
         </button>
       ))}
+
     </div>
   );
 };

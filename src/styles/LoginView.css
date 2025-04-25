@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* גובה מסך מלא */
+    height: 100vh; 
     background: linear-gradient(to right, #5c3887, #f0c2fb);
     padding-left: 150px;
     padding-top: 0px;
@@ -85,15 +85,4 @@
     font-size: 0.9rem;
     background-color: transparent ;
  
-  }
-  
-  .logout-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 6px 12px;
-    background-color: #eee;
-    border: 1px solid #888;
-    border-radius: 5px;
-    cursor: pointer;
   }

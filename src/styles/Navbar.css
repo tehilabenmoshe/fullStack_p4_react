@@ -5,28 +5,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
+  padding-left:40px;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-right:150px;
   background-color: #fff;
   width: 100%;
   box-sizing: border-box;
+  color:#5c3887;
 }
 
   
-.logo {
-  font-size: 1.2rem;
-  font-weight: 600;
-  
+.logo-img {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
 }
+
 
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 12px;
-  white-space: nowrap;
+
 }
 
 .username {
-  font-size: 1rem;
+ 
   white-space: nowrap;
 }
 
@@ -38,7 +43,11 @@
   color: white;
   cursor: pointer;
   font-size: 14px;
-  margin-right: 0; /* חובה! */
+  margin-bottom: 20px; 
   font-weight: 400;
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  padding: 6px 12px;
 
 }

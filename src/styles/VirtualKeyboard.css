@@ -1,0 +1,30 @@
+.virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 5px;
+    background-color: #e8e8e8;
+    max-width: 700px;
+}
+  
+
+.virtual-keyboard button {
+    margin: 4px;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    min-width: 40px;
+}
+
+.virtual-keyboard button.space-button {
+    min-width: 100px; /* רווח הרבה יותר רחב */
+}
+  
+  
+  
+.virtual-keyboard button:hover {
+    background-color: #eee;
+    border: none;
+}

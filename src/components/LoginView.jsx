@@ -37,7 +37,7 @@ const LoginView  = ({ setUsername }) => {
           every use case
         </h3>
 
-        <button className="register-btn1">Register now!</button>
+        <button className="register-btn1" onClick={() => setIsRegistered(false)}>Register now!</button>
       </div>
 
       <div className="login-box">
@@ -52,7 +52,7 @@ const LoginView  = ({ setUsername }) => {
         {isRegistered ? (
           <button className="login-btn"onClick={handleLogin}>Login</button>
         ) : (
-          <button onClick={handleRegister}>Register</button>
+          <button className="login-btn" onClick={handleRegister}>Register</button>
         )}
         <p>
           {isRegistered ? "Don't have an account?" : 'Already registered?'}{' '}
