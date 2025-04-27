@@ -10,7 +10,7 @@
     border-radius: 10px;
     padding: 10px 20px;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     font-weight: 100;
   }
@@ -40,7 +40,6 @@
     padding: 10px 16px;
     min-width: 40px;
     min-height: 50px;
-    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
@@ -97,7 +96,7 @@
   
   .emoji-button {
     background-color: white;
-    font-size: 22px;
+    font-size: 16px;
     padding: 10px 18px;
   }
   
