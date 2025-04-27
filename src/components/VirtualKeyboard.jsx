@@ -1,9 +1,6 @@
 import React from 'react';
 import '../styles/VirtualKeyboard.css';
 
-
-//const characters = ['😊','⬅️','1','2','3','4','5','6','7','8','9','0', 'A', 'B', 'C', 'D', 'E', 'F', 'G','H', 'I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-
 const keyboards = {
   EN: ['⬅️', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE'],
   HE: ['⬅️', 'א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת','SPACE'],
@@ -15,7 +12,10 @@ const VirtualKeyboard = ({ onCharClick, language = 'EN', showEmojis = false }) =
 
   const handleClick = (char) => {
     if (char === 'SPACE') {
-      onCharClick(' ');;
+      onCharClick(' ');
+    }
+    else if (char === '⬅️') {
+      onCharClick('BACKSPACE');
     } else {
       onCharClick(char);
     }

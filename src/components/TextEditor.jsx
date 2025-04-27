@@ -3,7 +3,14 @@ import React, { useRef, useEffect } from 'react';
 import GraphemeSplitter from 'grapheme-splitter';
 const splitter = new GraphemeSplitter();
 
-const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children }) => {
+const TextEditor = ({ 
+  text, 
+  setText, 
+  cursorPosition, 
+  setCursorPosition, 
+  textFormat,
+  children 
+}) => {
   const textareaRef = useRef(null);
 
   const handleCursorChange = (e) => {
@@ -51,6 +58,33 @@ const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children
     }, 0);
   };
 
+  // const insertCharAtCursor = (char) => {
+  //   if (char === '←') {
+  //     if (cursorPosition > 0) {
+  //       setCursorPosition(cursorPosition - 1);
+  //     }
+  //   } else if (char === '→') {
+  //     if (cursorPosition < text.length) {
+  //       setCursorPosition(cursorPosition + 1);
+  //     }
+  //   } else if (char === '⌫') {
+  //     if (cursorPosition > 0) {
+  //       const updatedText = text.slice(0, cursorPosition - 1) + text.slice(cursorPosition);
+  //       setText(updatedText);
+  //       setCursorPosition(cursorPosition - 1);
+  //     }
+  //   } else if (char === '⏎') {
+  //     const updatedText = text.slice(0, cursorPosition) + '\n' + text.slice(cursorPosition);
+  //     setText(updatedText);
+  //     setCursorPosition(cursorPosition + 1);
+  //   } else {
+  //     const updatedText = text.slice(0, cursorPosition) + char + text.slice(cursorPosition);
+  //     setText(updatedText);
+  //     setCursorPosition(cursorPosition + char.length);
+  //   }
+  // };
+  
+
   // אחרי כל שינוי – למקם את הסמן
   useEffect(() => {
     if (textareaRef.current) {
@@ -59,6 +93,13 @@ const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children
       textareaRef.current.selectionEnd = cursorPosition;
     }
   }, [cursorPosition, text]);
+
+  const textareaStyle = {
+    fontFamily: textFormat.font,
+    fontSize: textFormat.size,
+    color: textFormat.color
+  };
+
 
   return (
     <div className="text-editor">
@@ -69,10 +110,10 @@ const TextEditor = ({ text, setText, cursorPosition, setCursorPosition, children
         onClick={handleCursorChange}
         onKeyUp={handleCursorChange}
         placeholder="Type something here..."
+        style={textareaStyle}
       ></textarea>
 
-      {/* העברת הפונקציה למקלדת */}
-      {children}
+       {children(insertCharAtCursor)}
     </div>
   );
 };
