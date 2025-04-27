@@ -21,25 +21,6 @@ const TextEditorArea = ({ renderVirtualKeyboard }) => {
       }));
     };
   
-//   return (
-//     <div className="text-editors">
-//       <TextDisplay 
-//         text={"כאן יוצג טקסט"}
-//         cursorPosition={0}
-//         textFormat={{ font: "Arial", size: "16px", color: "black" }}
-//       />
-      
-//       <TextEditor 
-//         text={"כאן עורך טקסט"}
-//         setText={() => {}} 
-//         cursorPosition={0}
-//         setCursorPosition={() => {}}
-//         textFormat={{ font: "Arial", size: "16px", color: "black" }}
-//       >
-//         {renderVirtualKeyboard}
-//       </TextEditor>
-//     </div>
-//   );
 return (
     <div className="text-editors">
       {/* שליטה על פורמט */}

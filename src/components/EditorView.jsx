@@ -22,20 +22,6 @@ const EditorView = ({ username }) => {
   // const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
   // const [prevLanguageBeforeEmoji, setPrevLanguageBeforeEmoji] = useState('EN');
   
-  const toggleLanguage = () => {
-    setLanguage(prev => (prev === 'EN' ? 'HE' : 'EN'));
-  };
-
-  const toggleEmojiKeyboard = () => {
-    if (showEmojiKeyboard) {
-      setShowEmojiKeyboard(false);
-      setLanguage(prevLanguageBeforeEmoji);
-    } else {
-      setPrevLanguageBeforeEmoji(language);
-      setShowEmojiKeyboard(true);
-    }
-  };
-
   const renderVirtualKeyboard = (insertCharAtCursor) => (
     <VirtualKeyboard
       onCharClick={(char) => insertCharAtCursor(char)}
@@ -172,21 +158,7 @@ const EditorView = ({ username }) => {
     //   </div>
 
       {/* מקלדת וירטואלית וכפתורי שפה */}
-      <div className="keyboard-area">
-        <div className="toolbar">
-          <button onClick={toggleEmojiKeyboard}>
-            {showEmojiKeyboard ? '⌨️ חזרה' : '😊 אימוג׳ים'}
-          </button>
-
-          <button
-            onClick={toggleLanguage}
-            disabled={showEmojiKeyboard}
-            className={`language-toggle ${showEmojiKeyboard ? 'disabled' : ''}`}
-          >
-            {language === 'EN' ? 'עברית' : 'English'}
-          </button>
-        </div>
-      </div>
+      <div className="keyboard-area"/>
     </div>
   );
 };
