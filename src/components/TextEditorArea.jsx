@@ -1,27 +1,18 @@
 // src/components/TextEditorArea.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import TextEditor from './TextEditor';
 import TextDisplay from './TextDisplay';
 import TextFormatControls from './TextFormatControls';
 
-const TextEditorArea = ({ renderVirtualKeyboard }) => {
-    const [text, setText] = useState('');
-    const [cursorPosition, setCursorPosition] = useState(0);
-  
-    const [textFormat, setTextFormat] = useState({
-      font: 'Arial',
-      size: '16px',
-      color: 'black'
-    });
-  
-    const handleFormatChange = (formatType, value) => {
-      setTextFormat(prev => ({
-        ...prev,
-        [formatType]: value
-      }));
-    };
-  
-return (
+const TextEditorArea = ({
+  text,
+  setText,
+  cursorPosition,
+  setCursorPosition,
+  textFormat,
+  handleFormatChange
+}) => {
+  return (
     <div className="text-editors">
       {/* שליטה על פורמט */}
       <TextFormatControls
@@ -45,9 +36,7 @@ return (
         cursorPosition={cursorPosition}
         setCursorPosition={setCursorPosition}
         textFormat={textFormat}
-      >
-        {renderVirtualKeyboard}
-      </TextEditor>
+      />
     </div>
   );
 };

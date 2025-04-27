@@ -113,7 +113,6 @@ const TextEditor = ({
         style={textareaStyle}
       ></textarea>
 
-       {children(insertCharAtCursor)}
     </div>
   );
 };
