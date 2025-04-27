@@ -2,9 +2,9 @@ import React from 'react';
 import '../styles/VirtualKeyboard.css';
 
 const keyboards = {
-  EN: ['⬅️', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE'],
-  HE: ['⬅️', 'א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת','SPACE'],
-  EMOJI: ['⬅️', '😊','😂','😍','👍','🔥','🎉','🙌','💡','🥳','😎','❤️','🤔','💻','SPACE']
+  EN: ['BACKSPACE', 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','SPACE'],
+  HE: ['BACKSPACE', 'א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת','SPACE'],
+  EMOJI: ['BACKSPACE', '😊','😂','😍','👍','🔥','🎉','🙌','💡','🥳','😎','❤️','🤔','💻','SPACE']
 };
 
 const VirtualKeyboard = ({ onCharClick, language = 'EN', showEmojis = false }) => {
@@ -14,7 +14,7 @@ const VirtualKeyboard = ({ onCharClick, language = 'EN', showEmojis = false }) =
     if (char === 'SPACE') {
       onCharClick(' ');
     }
-    else if (char === '⬅️') {
+    else if (char === 'BACKSPACE') {
       onCharClick('BACKSPACE');
     } else {
       onCharClick(char);

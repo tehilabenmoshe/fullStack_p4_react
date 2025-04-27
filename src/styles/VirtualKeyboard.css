@@ -11,18 +11,18 @@
 .virtual-keyboard button {
     margin: 4px;
     padding: 10px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     border-radius: 8px;
     background-color: #f0f0f0;
     cursor: pointer;
     min-width: 40px;
+    font-family: 'Arimo';
 }
 
 .virtual-keyboard button.space-button {
-    min-width: 100px; /* רווח הרבה יותר רחב */
+    min-width: 500px; /* רווח הרבה יותר רחב */
 }
-  
-  
+   
   
 .virtual-keyboard button:hover {
     background-color: #eee;

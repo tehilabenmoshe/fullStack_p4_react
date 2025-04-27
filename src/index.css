@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap?family=Geologica:wght@100..900&" );
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap?family=Geologica:wght@100..900&family=Arimo:ital,wght@0,400..700;1,400..700&" );
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, 'Geologica';
+  font-family: system-ui, 'Arimo', Helvetica, Arial, sans-serif, 'Geologica';
   line-height: 1.5;
   font-weight: 400;
 
