@@ -1,30 +1,103 @@
-.virtual-keyboard {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    gap: 5px;
-    background-color: #e8e8e8;
-    max-width: 700px;
-}
+.keyboard-container {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
   
-
-.virtual-keyboard button {
-    margin: 4px;
-    padding: 10px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    min-width: 40px;
-    font-family: 'Arimo';
-}
-
-.virtual-keyboard button.space-button {
-    min-width: 500px; /* רווח הרבה יותר רחב */
-}
-   
-  
-.virtual-keyboard button:hover {
-    background-color: #eee;
+  .language-toggle {
+    background-color: white;
     border: none;
-}
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 100;
+  }
+  
+  .virtual-keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  
+  .key-button {
+    background-color: white;
+    border-radius: 6px;
+    margin: 3px;
+    padding: 10px 16px;
+    min-width: 40px;
+    min-height: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  .key-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .space-button {
+    min-width: 500px;
+  }
+  
+  .shift-button, .capslock-button, .tab-button, .return-button, .delete-button {
+    min-width: 80px;
+  }
+  
+  .delete-button {
+    background-color: white;
+  }
+  
+  .return-button {
+    background-color: white;
+  }
+  
+  .shift-button {
+    background-color: white;
+  }
+  
+  .capslock-button {
+    background-color: white;
+  }
+  
+  .tab-button {
+    background-color: white;
+  }
+  
+  .capslock-active {
+    background-color: white !important;
+
+  }
+  
+  .pressed {
+    transform: scale(0.95);
+    background-color: white;
+  }
+
+  
+  .toggle-lang-button {
+    background-color: white;
+    padding: 10px 18px;
+  }
+
+  
+  .emoji-button {
+    background-color: white;
+    font-size: 22px;
+    padding: 10px 18px;
+  }
+  

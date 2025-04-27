@@ -2,7 +2,7 @@
 :root {
   font-family: system-ui, 'Arimo', Helvetica, Arial, sans-serif, 'Geologica';
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 200;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -15,7 +15,7 @@
 }
 
 a {
-  font-weight: 500;
+  
   color: #646cff;
   text-decoration: inherit;
 }
@@ -38,7 +38,7 @@ h1 {
 button {
   border-radius: 8px;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   font-family: inherit;
   cursor: pointer;
   border: none;
