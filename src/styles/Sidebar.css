@@ -1,0 +1,78 @@
+.sidebar {
+    width: 250px;
+    background-color: #f8eeff;
+    height: 100vh;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    color: #5c3887;
+    font-family: 'Geologica';
+    
+  }
+  
+  .sidebar-header {
+    margin-bottom: 20px;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin: 50px;
+    font-family: 'Geologica';
+  }
+  
+  .user-avatar {
+    background-color: #b892e6;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+    font-size: 26px;
+    color: #5c3887;
+    
+  }
+  
+  .sidebar-files {
+    flex-grow: 1;
+  }
+  
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top:20px
+  }
+  
+  .file-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .edit-button {
+    background-color: #5c3887;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: thin;
+    font-size: 14px;
+  }
+  

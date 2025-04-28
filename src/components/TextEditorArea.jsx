@@ -1,8 +1,8 @@
-// src/components/TextEditorArea.jsx
 import React from 'react';
 import TextEditor from './TextEditor';
 import TextDisplay from './TextDisplay';
 import TextFormatControls from './TextFormatControls';
+import '../styles/TextEditorArea.css';
 
 const TextEditorArea = ({
   text,
@@ -14,29 +14,30 @@ const TextEditorArea = ({
 }) => {
   return (
     <div className="text-editors">
-      {/* שליטה על פורמט */}
-      <TextFormatControls
-        onFormatChange={handleFormatChange}
-        currentFont={textFormat.font}
-        currentSize={textFormat.size}
-        currentColor={textFormat.color}
-      />
-
-      {/* תצוגת טקסט */}
+      {/* תצוגת טקסט למעלה */}
       <TextDisplay 
         text={text}
         cursorPosition={cursorPosition}
         textFormat={textFormat}
       />
 
-      {/* עורך טקסט */}
-      <TextEditor 
-        text={text}
-        setText={setText}
-        cursorPosition={cursorPosition}
-        setCursorPosition={setCursorPosition}
-        textFormat={textFormat}
-      />
+      {/* אזור עריכה + פורמט יחד בשורה */}
+      <div className="editor-with-controls">
+        <TextEditor 
+          text={text}
+          setText={setText}
+          cursorPosition={cursorPosition}
+          setCursorPosition={setCursorPosition}
+          textFormat={textFormat}
+        />
+
+        <TextFormatControls
+          onFormatChange={handleFormatChange}
+          currentFont={textFormat.font}
+          currentSize={textFormat.size}
+          currentColor={textFormat.color}
+        />
+      </div>
     </div>
   );
 };

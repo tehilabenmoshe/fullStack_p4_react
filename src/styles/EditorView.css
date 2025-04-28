@@ -1,49 +1,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap?family=Geologica:wght@100..900&" );
 
-
-.format-controls-container {
-  display: flex;
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 10px;
-  justify-content: center;
+.editor-page {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to right, #b892e6, #c69ad1);
 }
 
-.text-format-controls {
+.editor-container {
   display: flex;
-  gap: 15px;
+  height: 100%;
+}
+
+.editor-main {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap; /* כדי שיורדו שורות אם אין מקום */
+  gap: 20px; /* רווח בין ה־TextAreas */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+
+.text-area-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+
+.edit-text-page {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  direction: rtl;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+ 
+  font-family: 'Geologica';
 }
-
-.format-control {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.format-control label {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.format-control select {
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
- .edit-text-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    gap: 20px;
-    padding: 20px;
-    background: linear-gradient(to right, #8b69b4, #c69ad1);
-    font-family: 'Geologica';
-  }
 
   .text-area-container {
     width: 100%;
@@ -53,16 +46,7 @@
     gap: 10px;
   }
 
-  .keyboard-area {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    background-color: #c0c0c0;
-    padding: 10px;
-  }
+ 
 
 
   .file-actions {
@@ -72,45 +56,6 @@
   }
 
 
-  .text-title {
-    color: #137083;               
-    font-size: 1.5rem;             
-    margin-bottom: 10px;
-  }
-  
-
-  .text-display {
-    padding: 20px;
-    background-color: #f0f0f0;
-    min-height: 150px;
-  }
-  
-  .text-output {
-    white-space: pre-wrap;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #fff;
-    min-height: 50px;
-  }
-  
-  .text-editor {
-    padding: 10px;
-
-    border: none;
-    
-  }
-  
-  .text-editor textarea {
-    width: 90%;
-    height: 100px;
-    font-size: 1rem;
-    padding: 10px;
-    border: none;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: none;
-  }
-  
   
   .cursor {
     display: inline-block;
@@ -148,28 +93,8 @@
     color:white;
   }
 
-  .keyboard-controls {
-    margin: 10px 0;
-    display: flex;
-    gap: 4px;
-  }
-  
-  .keyboard-controls button {
-    padding: 6px 12px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .language-toggle {
-    opacity: 1;
-    cursor: pointer;
-    transition: opacity 0.2s ease, cursor 0.2s ease;
-  }
-  
-  .language-toggle.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+
+
   
   .file-actions button:hover {
     background-color: #eee;

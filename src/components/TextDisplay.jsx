@@ -9,7 +9,6 @@ const TextDisplay = ({ text, textFormat }) => {
 
   return (
     <div className="text-display">
-      <h2 className="text-title">Text Preview:</h2>
       <div className="text-output" style={displayStyle}>
         {text}
       </div>

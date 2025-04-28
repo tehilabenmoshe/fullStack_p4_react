@@ -1,0 +1,62 @@
+.text-editors {
+  background: #f2f1f1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 400px; /* כל TextEditorArea ברוחב קבוע */
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+  
+.editor-with-controls {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.text-editor {
+  flex: 1;
+}
+
+.text-format-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.text-title {
+  color: #fcfcfc;               
+  font-size: 1rem;             
+  margin-bottom: 5px;
+}
+  
+
+.text-display {
+    min-height: 150px;
+    width: 300px;
+}
+
+.text-output {
+    white-space: pre-wrap;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #ffffff;
+    min-height: 150px;
+}
+
+
+
+.text-editor textarea {
+    width: 300px;
+    height: 100px;
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
