@@ -1,10 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap?family=Geologica:wght@100..900&" );
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Geologica:wght@100..900&display=swap');
 
 .editor-page {
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(to right, #b892e6, #c69ad1);
+  /* background: linear-gradient(to right, #b892e6, #c69ad1); */
+  background-image: url('../media/background06.jpg'); /* שימי כאן את שם התמונה */
+  background-size: cover; /* כדי שהתמונה תכסה את כל הרקע */
+  background-position: center; /* למרכז את התמונה */
+  background-repeat: no-repeat; /* שלא תהיה חזרה על התמונה */
 }
+
 
 .editor-container {
   display: flex;
