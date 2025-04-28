@@ -3,8 +3,13 @@
 .editor-page {
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(to right, #b892e6, #c69ad1);
+  /* background: linear-gradient(to right, #b892e6, #c69ad1); */
+  background-image: url('../media/background06.jpg'); /* שימי כאן את שם התמונה */
+  background-size: cover; /* כדי שהתמונה תכסה את כל הרקע */
+  background-position: center; /* למרכז את התמונה */
+  background-repeat: no-repeat; /* שלא תהיה חזרה על התמונה */
 }
+
 
 .editor-container {
   display: flex;
