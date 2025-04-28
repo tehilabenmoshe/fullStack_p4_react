@@ -70,7 +70,7 @@ const EditorView = ({ username }) => {
   };
 
 
-  //שינוי שם
+  //עדכון טקסט
   const handleUpdateText = (fileId, newText) => {
     setOpenEditors(prevEditors =>
       prevEditors.map(editor =>
