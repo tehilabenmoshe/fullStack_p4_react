@@ -21,17 +21,28 @@ const EditorView = ({ username }) => {
   }, [username]);
 
   const handleCreateNewFile = () => {
-    const fileName = prompt('Enter new file name:');
-    if (fileName) {
-      try {
-        FileManager.createNewFile(username, fileName);
-        refreshUserFiles();
-        handleEditFile(fileName); // פותח לפי השם
-      } catch (error) {
-        alert(error.message);
-      }
-    }
+    const newFileId = `new-${Date.now()}`; // מזהה ייחודי
+    const newEditor = {
+      id: newFileId,
+      name: '',  // השדה ריק, המשתמש יכניס שם
+      text: '',
+      textFormat: {
+        font: 'Arial',
+        size: '16px',
+        color: 'black',
+        bold: false,
+        italic: false,
+        underline: false,
+        align: 'left'
+      },
+      selectionStart: 0,
+      selectionEnd: 0
+    };
+  
+    setOpenEditors(prev => [...prev, newEditor]);
+    setFocusedEditorId(newFileId);
   };
+  
   
 
   const refreshUserFiles = () => {
@@ -160,6 +171,24 @@ const EditorView = ({ username }) => {
     });
   };
 
+
+  const handleCloseEditor = (editorId) => {
+    setOpenEditors(prevEditors => prevEditors.filter(editor => editor.id !== editorId));
+  };
+  
+  const handleDeleteFile = (fileId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this file?');
+    if (confirmDelete) {
+      // מוחק מהזיכרון (localStorage) דרך FileManager
+      FileManager.deleteFile(username, fileId);
+  
+      setOpenEditors(prevEditors => prevEditors.filter(editor => editor.id !== fileId));
+
+      refreshUserFiles();
+    }
+  };
+  
+
   
 
   return (
@@ -182,10 +211,12 @@ const EditorView = ({ username }) => {
               cursorPosition={[editor.selectionStart, editor.selectionEnd]}
               setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
               textFormat={editor.textFormat}
-              handleFormatChange={(newFormat) => handleUpdateFormat(editor.id, newFormat)}
+              handleFormatChange={(field, value) => handleUpdateFormat(editor.id, { [field]: value })}
               fileName={editor.name}
               onRenameFile={(newName) => handleRenameFile(editor.id, newName)}
               onSave={() => handleSaveFile(editor.id)}
+              onClose={() => handleCloseEditor(editor.id)}
+              onDelete={() => handleDeleteFile(editor.id)}
             />
           ))}
 

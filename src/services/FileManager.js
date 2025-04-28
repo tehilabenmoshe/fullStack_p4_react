@@ -57,6 +57,18 @@ class FileManager {
     localStorage.setItem('users', JSON.stringify(users));
   }
 
+  static deleteFile(username, fileId) {
+    const users = JSON.parse(localStorage.getItem('users')) || {};
+  
+    if (users[username] && users[username].files[fileId]) {
+      delete users[username].files[fileId];  // מוחקים את הקובץ
+  
+      localStorage.setItem('users', JSON.stringify(users));  // שומרים את העדכון
+
+    }
+  }
+  
+
   static createNewFile(username, fileName) {
     const users = JSON.parse(localStorage.getItem('users')) || {};
 

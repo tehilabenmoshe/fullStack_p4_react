@@ -16,7 +16,7 @@
 }
 
 .close-button-outside:hover {
-  background-color: #d32f2f;
+  color: #7d7c7c;
 }
 
 
@@ -92,7 +92,7 @@
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
   width: 220px;
   height: 300px;
 }
@@ -129,11 +129,7 @@
   background-color: #FF9800;
 }
 
-.close-button {
-  background-color: #f4f136;
-  color:black;
-  margin-right: 10px;
-}
+
 
 
 /* אזור כתיבה */
@@ -186,4 +182,28 @@
   border: none;
   font-size: 11px;
   background-color: white;
+  border-radius: 7px;
+}
+
+.color-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ✅ 3 עמודות קבועות */
+  gap: 5px;
+  margin-top: 1px;
+}
+
+.color-circle {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+
+}
+
+.color-circle:hover {
+  transform: scale(1.2); /* כשהעכבר מעל - יגדל טיפה */
+}
+
+.color-circle.selected {
+  transform: scale(1.4); /* ✅ כשהצבע נבחר - יגדל עוד יותר */
 }

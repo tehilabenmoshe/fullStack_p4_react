@@ -9,19 +9,20 @@ const colorOptions = [
   { value: 'red', label: 'אדום' },
   { value: 'blue', label: 'כחול' },
   { value: 'green', label: 'ירוק' },
-  { value: 'purple', label: 'סגול' }
+  { value: 'purple', label: 'סגול' },
+  { value: 'pink', label: 'ורוד' }
 ];
 
 const TextFormatControls = ({ onFormatChange, currentFont, currentSize, currentColor }) => {
 
   const handleFontChange = (e) => onFormatChange('font', e.target.value);
   const handleSizeChange = (e) => onFormatChange('size', e.target.value);
-  const handleColorChange = (e) => onFormatChange('color', e.target.value);
+  const handleColorChange = (color) => onFormatChange('color', color); 
 
   return (
     <div className="text-format-controls">
       <div className="format-control">
-        <label>גופן:</label>
+        <label>font:</label>
         <select value={currentFont} onChange={handleFontChange}>
           {fontOptions.map((font) => (
             <option key={font} value={font}>
@@ -32,7 +33,7 @@ const TextFormatControls = ({ onFormatChange, currentFont, currentSize, currentC
       </div>
 
       <div className="format-control">
-        <label>גודל:</label>
+        <label>size:</label>
         <select value={currentSize} onChange={handleSizeChange}>
           {sizeOptions.map((size) => (
             <option key={size} value={size}>
@@ -43,14 +44,17 @@ const TextFormatControls = ({ onFormatChange, currentFont, currentSize, currentC
       </div>
 
       <div className="format-control">
-        <label>צבע:</label>
-        <select value={currentColor} onChange={handleColorChange}>
+        <label>color:</label>
+        <div className="color-options">
           {colorOptions.map((color) => (
-            <option key={color.value} value={color.value}>
-              {color.label}
-            </option>
+            <div
+                key={color.value}
+                className={`color-circle ${currentColor === color.value ? 'selected' : ''}`}
+                style={{ backgroundColor: color.value }}
+                onClick={() => handleColorChange(color.value)}
+            ></div>
           ))}
-        </select>
+        </div>
       </div>
     </div>
   );

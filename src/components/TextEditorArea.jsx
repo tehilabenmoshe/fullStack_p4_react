@@ -3,6 +3,8 @@ import TextEditor from './TextEditor';
 import TextDisplay from './TextDisplay';
 import TextFormatControls from './TextFormatControls';
 import '../styles/TextEditorArea.css';
+import { FaSave, FaUndo, FaTrash } from 'react-icons/fa'; 
+
 
 const TextEditorArea = ({
   text,
@@ -13,13 +15,17 @@ const TextEditorArea = ({
   handleFormatChange,
   onSave,
   fileName,
-  onRenameFile
+  onRenameFile,
+  onClose,
+  onDelete
 }) => {
+
   return (
     <div className="editor-card">
 
-            {/* כפתור סגירה חיצוני */}
-      <button className="close-button-outside">❌</button>
+      {/* כפתור סגירה חיצוני */}
+      <button className="close-button-outside" onClick={onClose}>x</button>
+
       
       {/* גוף עיקרי */}
       <div className="editor-body">
@@ -45,9 +51,18 @@ const TextEditorArea = ({
                 className="file-name-input"
               />
 
-              <button className="save-button" onClick={onSave}>Save</button>
-              <button className="undo-button">↩️</button>
-              <button className="delete-button2">🗑️</button>
+              <button className="save-button" onClick={onSave}>
+                <FaSave /> {/* דיסקט */}
+              </button>
+
+              <button className="undo-button">
+                <FaUndo /> {/* חץ אחורה */}
+              </button>
+
+              <button className="delete-button2" onClick={onDelete}>
+                <FaTrash /> {/* פח אשפה */}
+              </button>
+
             </div>
 
             {/* אזור טקסט */}

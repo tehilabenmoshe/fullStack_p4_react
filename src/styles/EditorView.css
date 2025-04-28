@@ -4,7 +4,7 @@
   height: 100vh;
   overflow: hidden;
   /* background: linear-gradient(to right, #b892e6, #c69ad1); */
-  background-image: url('../media/background06.jpg'); /* שימי כאן את שם התמונה */
+  background: linear-gradient(to right, #c0a6e1, #c69ad1);
   background-size: cover; /* כדי שהתמונה תכסה את כל הרקע */
   background-position: center; /* למרכז את התמונה */
   background-repeat: no-repeat; /* שלא תהיה חזרה על התמונה */
@@ -42,72 +42,80 @@
   font-family: 'Geologica';
 }
 
-  .text-area-container {
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
- 
+.text-area-container {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 
-  .file-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
+
+
+.file-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: black;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: bottom;
+}
+
+.file-actions {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+}
+
+.file-actions input {
+padding: 8px;
+font-size: 1rem;
+}
+
+.file-actions button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #5c3887;
+  transition: background-color 0.2s;
+  color:white;
+}
+
+
+.keyboard-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 250px;
+
+}
 
 
   
-  .cursor {
-    display: inline-block;
-    width: 1px;
-    height: 1em;
-    background-color: black;
-    animation: blink 1s steps(2, start) infinite;
-    vertical-align: bottom;
-  }
-  
-  .file-actions {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 8px;
-  }
-  
-  .file-actions input {
-    padding: 8px;
-    font-size: 1rem;
-  }
-  
-  .file-actions button {
-    padding: 8px 16px;
-    font-size: 1rem;
-    font-weight: 300;
-    cursor: pointer;
-    border-radius: 8px;
-    background-color: #5c3887;
-    transition: background-color 0.2s;
-    color:white;
-  }
+.file-actions button:hover {
+  background-color: #eee;
+}
 
-
-
-  
-  .file-actions button:hover {
-    background-color: #eee;
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
-
-  @keyframes blink {
-    50% {
-      opacity: 0;
-    }
-  }
+}
 
 
   
