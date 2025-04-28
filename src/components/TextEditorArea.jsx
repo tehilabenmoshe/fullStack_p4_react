@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{ useState, useEffect } from 'react';
 import TextEditor from './TextEditor';
 import TextDisplay from './TextDisplay';
 import TextFormatControls from './TextFormatControls';
@@ -10,10 +10,27 @@ const TextEditorArea = ({
   cursorPosition,
   setCursorPosition,
   textFormat,
-  handleFormatChange
+  handleFormatChange,
+  onSave,
+  fileName,
+  onRenameFile
 }) => {
   return (
     <div className="text-editors">
+      {/* הצגת שם הקובץ + כפתור שמירה */}
+      <div className="editor-header">
+        <input
+          type="text"
+          value={fileName}
+          onChange={(e) => onRenameFile(e.target.value)}
+          placeholder="File name"
+          className="file-name-input"
+        />
+        <button className="save-button" onClick={onSave}>
+          Save
+        </button>
+      </div>
+      
       {/* תצוגת טקסט למעלה */}
       <TextDisplay 
         text={text}
@@ -29,6 +46,9 @@ const TextEditorArea = ({
           cursorPosition={cursorPosition}
           setCursorPosition={setCursorPosition}
           textFormat={textFormat}
+          onSave={onSave}
+          fileName={fileName}
+          onRenameFile={onRenameFile}
         />
 
         <TextFormatControls

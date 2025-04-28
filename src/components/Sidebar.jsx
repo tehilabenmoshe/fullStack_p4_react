@@ -2,7 +2,7 @@
 import React from 'react';
 import '../styles/Sidebar.css'; // נוסיף סטיילים
 
-const Sidebar = ({ username, openFiles, onEditFile }) => {
+const Sidebar = ({ username, openFiles, onEditFile, onCreateFile }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -23,6 +23,14 @@ const Sidebar = ({ username, openFiles, onEditFile }) => {
                 </button>
             </div>
         ))}
+
+        <div className="add-file-button-container">
+            <button className="add-file-button" onClick={onCreateFile}>
+              + 
+            </button>
+        </div>
+
+
       </div>
 
     </div>

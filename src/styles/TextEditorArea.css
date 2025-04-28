@@ -60,3 +60,31 @@
     border: none;
 }
 
+/*////*/
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.file-name-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.save-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #d1b3ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #c299ff;
+}

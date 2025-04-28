@@ -1,58 +1,127 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import VirtualKeyboard from '../components/VirtualKeyboard';
 import TextEditorArea from '../components/TextEditorArea';
 import Sidebar from '../components/Sidebar';
+import FileManager from '../services/FileManager';
 import '../styles/EditorView.css';
 import GraphemeSplitter from 'grapheme-splitter';
 
 const splitter = new GraphemeSplitter();
 
-
-
 const EditorView = ({ username }) => {
-  const [openEditors, setOpenEditors] = useState([
-    {
-      id: 'new-text',
-      name: 'New Text',
-      text: '',
-      cursorPosition: 0,
-      selectionStart: 0,
-      selectionEnd: 0,
-      textFormat: {
-        font: 'Arial',
-        size: '16px',
-        color: 'black',
-        bold: false,
-        italic: false,
-        underline: false,
-        align: 'left'
-      }
-    }
-  ]);
-  
-
+  const [openEditors, setOpenEditors] = useState([]);
+  const [userFiles, setUserFiles] = useState([]);
   const [language, setLanguage] = useState('EN');
   const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
-  const [focusedEditorId, setFocusedEditorId] = useState('new-text'); // איפה להתמקד
-  const [userFiles, setUserFiles] = useState([]);
-
+  const [focusedEditorId, setFocusedEditorId] = useState(null);
+  
+  // טעינת הקבצים של המשתמש
   useEffect(() => {
-    const files = loadUserFiles(username);
-    setUserFiles(files);
+    refreshUserFiles();
   }, [username]);
 
-
+  const handleCreateNewFile = () => {
+    const fileName = prompt('Enter new file name:');
+    if (fileName) {
+      try {
+        FileManager.createNewFile(username, fileName);
+        refreshUserFiles();
+        handleEditFile(fileName); // פותח לפי השם
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
   
+
+  const refreshUserFiles = () => {
+    const files = FileManager.loadUserFiles(username);
+    setUserFiles(files);
+  };
+
+  const handleEditFile = (fileId) => {
+    const existingEditor = openEditors.find(e => e.id === fileId);
+    if (!existingEditor) {
+      const file = FileManager.loadFileContent(username, fileId);
+      if (file) {
+        setOpenEditors(prev => [...prev, {
+          id: file.id,
+          name: file.name,
+          text: file.text,
+          textFormat: file.textFormat,
+          selectionStart: 0,
+          selectionEnd: 0
+        }]);
+      }
+    }
+    setFocusedEditorId(fileId);
+  };
+
+  const handleUpdateText = (fileId, newText) => {
+    setOpenEditors(prevEditors =>
+      prevEditors.map(editor =>
+        editor.id === fileId ? { ...editor, text: newText } : editor
+      )
+    );
+  };
+
+  const handleUpdateFormat = (fileId, newFormat) => {
+    setOpenEditors(prevEditors =>
+      prevEditors.map(editor =>
+        editor.id === fileId ? { ...editor, textFormat: { ...editor.textFormat, ...newFormat } } : editor
+      )
+    );
+  };
+
+  const handleRenameFile = (fileId, newName) => {
+    setOpenEditors(prevEditors =>
+      prevEditors.map(editor =>
+        editor.id === fileId ? { ...editor, name: newName } : editor
+      )
+    );
+  };
+
+  const handleCursorChange = (fileId, newSelectionStart, newSelectionEnd) => {
+    setOpenEditors(prevEditors =>
+      prevEditors.map(editor =>
+        editor.id === fileId
+          ? { ...editor, selectionStart: newSelectionStart, selectionEnd: newSelectionEnd }
+          : editor
+      )
+    );
+    setFocusedEditorId(fileId);
+  };
+
+  const handleUpdateEditor = (fileId, updates) => {
+    setOpenEditors(prevEditors =>
+      prevEditors.map(editor =>
+        editor.id === fileId ? { ...editor, ...updates } : editor
+      )
+    );
+  };
+
+  const handleSaveFile = (fileId) => {
+    const editor = openEditors.find(e => e.id === fileId);
+    if (editor) {
+      FileManager.saveFileContent(username, fileId, {
+        name: editor.name,
+        text: editor.text,
+        textFormat: editor.textFormat
+      });
+      refreshUserFiles();
+      alert('File saved successfully!');
+    }
+  };
 
   const insertCharToFocusedEditor = (char) => {
-    let newCursorPos = 0; // ✨ תגדירי פה למעלה
-  
-    setOpenEditors(prevEditors =>
-      prevEditors.map(editor => {
+    setOpenEditors(prevEditors => {
+      let newCursorPos = 0;
+
+      const newEditors = prevEditors.map(editor => {
         if (editor.id === focusedEditorId) {
           let updatedText;
           const { selectionStart, selectionEnd, text } = editor;
-  
+
           if (char === 'BACKSPACE') {
             if (selectionStart !== selectionEnd) {
               updatedText = text.slice(0, selectionStart) + text.slice(selectionEnd);
@@ -71,82 +140,26 @@ const EditorView = ({ username }) => {
             updatedText = text.slice(0, selectionStart) + char + text.slice(selectionEnd);
             newCursorPos = selectionStart + char.length;
           }
-  
+
           return {
             ...editor,
             text: updatedText,
-            cursorPosition: newCursorPos,
             selectionStart: newCursorPos,
             selectionEnd: newCursorPos
           };
         }
         return editor;
-      })
-    );
-  
-    // ✅ ועכשיו newCursorPos באמת קיים פה
-    setTimeout(() => {
-      handleCursorChange(focusedEditorId, newCursorPos, newCursorPos);
-    }, 0);
-  };
-  
-  
-  
+      });
 
-  const handleUpdateText = (fileId, newText) => {
-    setOpenEditors(prevEditors =>
-      prevEditors.map(editor =>
-        editor.id === fileId ? { ...editor, text: newText } : editor
-      )
-    );
+      // עידכון קורסור אחרי שמירה
+      setTimeout(() => {
+        handleCursorChange(focusedEditorId, newCursorPos, newCursorPos);
+      }, 0);
+
+      return newEditors;
+    });
   };
 
-  const handleCursorChange = (fileId, newSelectionStart, newSelectionEnd) => {
-    setOpenEditors(prevEditors =>
-      prevEditors.map(editor =>
-        editor.id === fileId
-          ? { ...editor, selectionStart: newSelectionStart, selectionEnd: newSelectionEnd }
-          : editor
-      )
-    );
-    setFocusedEditorId(fileId);
-  };
-  
-
-  const handleEditFile = (fileId) => {
-    // כאן את אמורה לטעון מקובץ, אני מניח שאת מסודרת עם localStorage.
-    // מדמה טעינה:
-    const file = {
-      id: fileId,
-      name: fileId,
-      text: 'This is content of ' + fileId,
-      cursorPosition: 0,
-      textFormat: {
-        font: 'Arial',
-        size: '16px',
-        color: 'black',
-        bold: false,
-        italic: false,
-        underline: false,
-        align: 'left'
-      }
-    };
-
-    if (!openEditors.some(e => e.id === fileId)) {
-      setOpenEditors(prev => [...prev, file]);
-    }
-  };
-
-
-  const loadUserFiles = (username) => {
-    const users = JSON.parse(localStorage.getItem('users')) || {};
-    const userFiles = users[username]?.files || {};
-  
-    return Object.keys(userFiles).map(fileName => ({
-      id: fileName,
-      name: fileName
-    }));
-  };
   
 
   return (
@@ -157,9 +170,8 @@ const EditorView = ({ username }) => {
         username={username}
         openFiles={userFiles}
         onEditFile={handleEditFile}
+        onCreateFile={handleCreateNewFile}
       />
-
-
         <div className="editor-main">
           {openEditors.map(editor => (
             <TextEditorArea
@@ -167,11 +179,14 @@ const EditorView = ({ username }) => {
             id={editor.id}
             text={editor.text}
             setText={(newText) => handleUpdateText(editor.id, newText)}
-            cursorPosition={[editor.selectionStart, editor.selectionEnd]} // 🛠️ מעבירה זוג!
-            setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
-            textFormat={editor.textFormat}
-          />
-          
+              cursorPosition={[editor.selectionStart, editor.selectionEnd]}
+              setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
+              textFormat={editor.textFormat}
+              handleFormatChange={(newFormat) => handleUpdateFormat(editor.id, newFormat)}
+              fileName={editor.name}
+              onRenameFile={(newName) => handleRenameFile(editor.id, newName)}
+              onSave={() => handleSaveFile(editor.id)}
+            />
           ))}
 
           <div className="keyboard-area">
