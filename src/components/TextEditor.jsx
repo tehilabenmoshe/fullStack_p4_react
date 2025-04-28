@@ -31,7 +31,6 @@ const TextEditor = ({
     fontFamily: textFormat.font,
     fontSize: textFormat.size,
     color: textFormat.color,
-    width: '100%',
     height: '100%',
     padding: '10px',
     boxSizing: 'border-box'

@@ -34,12 +34,10 @@
   height: 100vh;
   gap: 20px;
   padding: 20px;
- 
   font-family: 'Geologica';
 }
 
   .text-area-container {
-    width: 100%;
     max-width: 800px;
     display: flex;
     flex-direction: column;

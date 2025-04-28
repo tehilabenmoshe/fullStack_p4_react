@@ -1,90 +1,189 @@
-.text-editors {
-  background: #f2f1f1;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  width: 400px; /* כל TextEditorArea ברוחב קבוע */
-  min-height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* עוטף את כל הקופסה */
+
+.close-button-outside {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  padding: 8px 10px;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10;
+  transition: background-color 0.3s;
 }
 
-  
-.editor-with-controls {
+.close-button-outside:hover {
+  background-color: #d32f2f;
+}
+
+
+.editor-card {
+  position: relative; 
+  background: rgb(239, 236, 239);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 700px;
+  height: 330px;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 20px;
 }
 
-.text-editor {
+.editor-top-buttons {
+  display: flex;
+  justify-content: space-between; /* ✅ רווח טוב בין השם לכפתורים */
+  align-items: center;
+  gap: 6px;
+}
+
+/* שדה שם קובץ */
+.file-name-input {
+  flex: 1; /* ✅ תופס את כל השטח הנותר */
+  width: 50px;
+  height: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: rgb(236, 236, 236);
+}
+
+
+/* אזור גוף העריכה */
+.editor-body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* חלק שמחלק לשני צדדים: תצוגה + עריכה */
+.editor-main-content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* אזור תצוגת הטקסט */
+.text-display {
   flex: 1;
+  background-color: #f9f9f9;
+  border:none;
+  border-radius: 8px;
+  padding: 15px;
+  height: 300px;
+  overflow-y: auto;
+  font-family: 'Arial', sans-serif;
+  font-size: 12px;
+  width: 200px;
+}
+
+/* אזור עריכה */
+.editor-with-controls {
+  flex: 2;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  padding-top: 17px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 220px;
+  height: 300px;
+}
+
+/* ✅ שינוי: כפתורים בתוך המסגרת */
+.editor-top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* סגנון כללי לכל הכפתורים */
+.editor-top-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  
+}
+
+/* צבעים שונים לכל כפתור */
+.save-button {
+  background-color: #4CAF50;
+}
+
+.undo-button {
+  background-color: #9C27B0;
+}
+
+.delete-button2 {
+  background-color: #FF9800;
+}
+
+.close-button {
+  background-color: #f4f136;
+  color:black;
+  margin-right: 10px;
+}
+
+
+/* אזור כתיבה */
+.text-editor {
+  width: 80%;
+}
+
+.text-editor textarea {
+  width: 280px;
+  min-height: 200px; /* שיניתי ל־200 שיהיה יותר פרופורציונלי */
+  padding: 12px;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #fff;
+  border: none;
+  box-sizing: border-box;
+  resize: vertical;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  border-radius: 3px;
+}
+
+/* אפקט כשהעכבר נכנס */
+.text-editor textarea:hover {
+  border-color: #888;
+}
+
+/* אפקט כשהtextarea בפוקוס */
+.text-editor textarea:focus {
+  border-color: #6a1b9a;
+  box-shadow: 0 0 5px rgba(106, 27, 154, 0.5);
+  outline: none;
 }
 
 .text-format-controls {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.text-title {
-  color: #fcfcfc;               
-  font-size: 1rem;             
-  margin-bottom: 5px;
-}
-  
-
-.text-display {
-    min-height: 150px;
-    width: 300px;
-}
-
-.text-output {
-    white-space: pre-wrap;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #ffffff;
-    min-height: 150px;
-}
-
-
-
-.text-editor textarea {
-    width: 300px;
-    height: 100px;
-    font-size: 1rem;
-    padding: 10px;
-    border: none;
-    margin-top: 15px;
-    border-radius: 5px;
-    border: none;
-}
-
-/*////*/
-.editor-header {
-  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.file-name-input {
-  flex-grow: 1;
-  margin-right: 10px;
+  gap: 10px;
   padding: 5px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 11px;
+
 }
 
-.save-button {
-  padding: 5px 10px;
-  font-size: 16px;
-  background-color: #d1b3ff;
-  color: white;
+/* שדרוג קטן ל-selectים */
+.text-format-controls select {
+  padding: 5px;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.save-button:hover {
-  background-color: #c299ff;
+  font-size: 11px;
+  background-color: white;
 }

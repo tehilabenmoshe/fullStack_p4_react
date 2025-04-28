@@ -1,4 +1,4 @@
-import React ,{ useState, useEffect } from 'react';
+import React from 'react';
 import TextEditor from './TextEditor';
 import TextDisplay from './TextDisplay';
 import TextFormatControls from './TextFormatControls';
@@ -16,48 +16,62 @@ const TextEditorArea = ({
   onRenameFile
 }) => {
   return (
-    <div className="text-editors">
-      {/* הצגת שם הקובץ + כפתור שמירה */}
-      <div className="editor-header">
-        <input
-          type="text"
-          value={fileName}
-          onChange={(e) => onRenameFile(e.target.value)}
-          placeholder="File name"
-          className="file-name-input"
-        />
-        <button className="save-button" onClick={onSave}>
-          Save
-        </button>
-      </div>
+    <div className="editor-card">
+
+            {/* כפתור סגירה חיצוני */}
+      <button className="close-button-outside">❌</button>
       
-      {/* תצוגת טקסט למעלה */}
-      <TextDisplay 
-        text={text}
-        cursorPosition={cursorPosition}
-        textFormat={textFormat}
-      />
+      {/* גוף עיקרי */}
+      <div className="editor-body">
+        <div className="editor-main-content">
 
-      {/* אזור עריכה + פורמט יחד בשורה */}
-      <div className="editor-with-controls">
-        <TextEditor 
-          text={text}
-          setText={setText}
-          cursorPosition={cursorPosition}
-          setCursorPosition={setCursorPosition}
-          textFormat={textFormat}
-          onSave={onSave}
-          fileName={fileName}
-          onRenameFile={onRenameFile}
-        />
+          {/* הצגת טקסט בצד אחד */}
+          <TextDisplay 
+            text={text}
+            cursorPosition={cursorPosition}
+            textFormat={textFormat}
+          />
 
-        <TextFormatControls
-          onFormatChange={handleFormatChange}
-          currentFont={textFormat.font}
-          currentSize={textFormat.size}
-          currentColor={textFormat.color}
-        />
+          {/* אזור עריכה מלא */}
+          <div className="editor-with-controls">
+
+            {/* ✅ שורה אחת - שם קובץ + כפתורים */}
+            <div className="editor-top-buttons">
+              <input
+                type="text"
+                value={fileName}
+                onChange={(e) => onRenameFile(e.target.value)}
+                placeholder="File name"
+                className="file-name-input"
+              />
+
+              <button className="save-button" onClick={onSave}>Save</button>
+              <button className="undo-button">↩️</button>
+              <button className="delete-button2">🗑️</button>
+            </div>
+
+            {/* אזור טקסט */}
+            <TextEditor 
+              text={text}
+              setText={setText}
+              cursorPosition={cursorPosition}
+              setCursorPosition={setCursorPosition}
+              textFormat={textFormat}
+            />
+
+            {/* אזור פורמט מתחת */}
+            <TextFormatControls
+              onFormatChange={handleFormatChange}
+              currentFont={textFormat.font}
+              currentSize={textFormat.size}
+              currentColor={textFormat.color}
+            />
+            
+          </div>
+
+        </div>
       </div>
+
     </div>
   );
 };
