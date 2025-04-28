@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VirtualKeyboard from '../components/VirtualKeyboard';
 import TextEditorArea from '../components/TextEditorArea';
 import Sidebar from '../components/Sidebar';
@@ -6,6 +6,8 @@ import '../styles/EditorView.css';
 import GraphemeSplitter from 'grapheme-splitter';
 
 const splitter = new GraphemeSplitter();
+
+
 
 const EditorView = ({ username }) => {
   const [openEditors, setOpenEditors] = useState([
@@ -29,6 +31,12 @@ const EditorView = ({ username }) => {
   const [language, setLanguage] = useState('EN');
   const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
   const [focusedEditorId, setFocusedEditorId] = useState('new-text'); // איפה להתמקד
+  const [userFiles, setUserFiles] = useState([]);
+
+  useEffect(() => {
+    const files = loadUserFiles(username);
+    setUserFiles(files);
+  }, [username]);
 
   const insertCharToFocusedEditor = (char) => {
     setOpenEditors(prevEditors =>
@@ -102,15 +110,28 @@ const EditorView = ({ username }) => {
     }
   };
 
+
+  const loadUserFiles = (username) => {
+    const users = JSON.parse(localStorage.getItem('users')) || {};
+    const userFiles = users[username]?.files || {};
+  
+    return Object.keys(userFiles).map(fileName => ({
+      id: fileName,
+      name: fileName
+    }));
+  };
+  
+
   return (
     <div className="editor-page">
       <div className="editor-container">
         
-        <Sidebar
-          username={username}
-          openFiles={[]} // תשימי את הרשימה מה-Storage שלך
-          onEditFile={handleEditFile}
-        />
+      <Sidebar
+        username={username}
+        openFiles={userFiles}
+        onEditFile={handleEditFile}
+      />
+
 
         <div className="editor-main">
           {openEditors.map(editor => (
