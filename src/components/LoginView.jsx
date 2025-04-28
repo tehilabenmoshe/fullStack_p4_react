@@ -3,11 +3,12 @@ import '../styles/LoginView.css';
 
 const LoginView  = ({ setUsername }) => {
   const [inputName, setInputName] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
   const [isRegistered, setIsRegistered] = useState(true);
 
   const handleLogin = () => {
     const users = JSON.parse(localStorage.getItem('users') || '{}');
-    if (inputName.trim() && users[inputName]) {
+    if (inputName.trim() && users[inputName] && users[inputName].password === inputPassword) {
       localStorage.setItem('currentUser', inputName);
       setUsername(inputName);
     } else {
@@ -16,16 +17,18 @@ const LoginView  = ({ setUsername }) => {
   };
 
   const handleRegister = () => {
-    if (inputName.trim()) {
+    if (inputName.trim()&& inputPassword.trim()) {
       const users = JSON.parse(localStorage.getItem('users') || '{}');
       if (users[inputName]) {
         alert('Username already exists.');
       } else {
-        users[inputName] = { files: {} };
+        users[inputName] = { password: inputPassword, files: {} };
         localStorage.setItem('users', JSON.stringify(users));
         localStorage.setItem('currentUser', inputName);
         setUsername(inputName);
       }
+    } else {
+      alert('Please fill in both username and password.');
     }
   };
 
@@ -47,6 +50,12 @@ const LoginView  = ({ setUsername }) => {
           placeholder="username"
           value={inputName}
           onChange={(e) => setInputName(e.target.value)}
+        />
+         <input
+          type="password"
+          placeholder="password"
+          value={inputPassword}
+          onChange={(e) => setInputPassword(e.target.value)}
         />
         
         {isRegistered ? (
