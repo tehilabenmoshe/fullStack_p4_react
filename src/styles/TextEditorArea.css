@@ -207,3 +207,21 @@
 .color-circle.selected {
   transform: scale(1.4); /* ✅ כשהצבע נבחר - יגדל עוד יותר */
 }
+
+.search-input {
+  background-color: #ededed;
+  width: 90%;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: #6a1b9a;
+  box-shadow: 0 0 5px rgba(106, 27, 154, 0.4);
+  outline: none;
+}
