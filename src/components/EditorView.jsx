@@ -41,21 +41,23 @@ const EditorView = ({ username }) => {
     setUserFiles(files);
   }, [username]);
 
+
+  
+
   const insertCharToFocusedEditor = (char) => {
+    let newCursorPos = 0; // ✨ תגדירי פה למעלה
+  
     setOpenEditors(prevEditors =>
       prevEditors.map(editor => {
         if (editor.id === focusedEditorId) {
           let updatedText;
-          let newCursorPos;
           const { selectionStart, selectionEnd, text } = editor;
   
           if (char === 'BACKSPACE') {
             if (selectionStart !== selectionEnd) {
-              // יש בחירה - מוחקים את הבחירה
               updatedText = text.slice(0, selectionStart) + text.slice(selectionEnd);
               newCursorPos = selectionStart;
             } else if (selectionStart > 0) {
-              // אין בחירה - מוחקים תו אחורה
               const left = splitter.splitGraphemes(text.slice(0, selectionStart));
               const right = splitter.splitGraphemes(text.slice(selectionStart));
               left.pop();
@@ -66,7 +68,6 @@ const EditorView = ({ username }) => {
               newCursorPos = 0;
             }
           } else {
-            // יש תו חדש -> נחליף את הבחירה
             updatedText = text.slice(0, selectionStart) + char + text.slice(selectionEnd);
             newCursorPos = selectionStart + char.length;
           }
@@ -82,7 +83,13 @@ const EditorView = ({ username }) => {
         return editor;
       })
     );
+  
+    // ✅ ועכשיו newCursorPos באמת קיים פה
+    setTimeout(() => {
+      handleCursorChange(focusedEditorId, newCursorPos, newCursorPos);
+    }, 0);
   };
+  
   
   
 
@@ -156,14 +163,15 @@ const EditorView = ({ username }) => {
         <div className="editor-main">
           {openEditors.map(editor => (
             <TextEditorArea
-              key={editor.id}
-              id={editor.id}
-              text={editor.text}
-              setText={(newText) => handleUpdateText(editor.id, newText)}
-              cursorPosition={editor.cursorPosition}
-              setCursorPosition={(pos) => handleCursorChange(editor.id, pos)}
-              textFormat={editor.textFormat}
-            />
+            key={editor.id}
+            id={editor.id}
+            text={editor.text}
+            setText={(newText) => handleUpdateText(editor.id, newText)}
+            cursorPosition={[editor.selectionStart, editor.selectionEnd]} // 🛠️ מעבירה זוג!
+            setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
+            textFormat={editor.textFormat}
+          />
+          
           ))}
 
           <div className="keyboard-area">

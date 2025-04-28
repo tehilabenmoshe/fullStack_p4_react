@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import GraphemeSplitter from 'grapheme-splitter';
 const splitter = new GraphemeSplitter();
@@ -8,37 +7,33 @@ const TextEditor = ({
   setText, 
   cursorPosition, 
   setCursorPosition, 
-  textFormat,
-  children 
+  textFormat
 }) => {
   const textareaRef = useRef(null);
 
   const handleCursorChange = (e) => {
     setCursorPosition([e.target.selectionStart, e.target.selectionEnd]);
   };
-  
 
   const handleInputChange = (e) => {
     setText(e.target.value);
-    setCursorPosition(e.target.selectionStart);
+    setCursorPosition([e.target.selectionStart, e.target.selectionEnd]);
   };
-  
 
-  // אחרי כל שינוי – למקם את הסמן
+  // כל פעם שהטקסט או המיקום משתנה -> לסדר את הסמן
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.focus();
-      textareaRef.current.selectionStart = cursorPosition;
-      textareaRef.current.selectionEnd = cursorPosition;
+      textareaRef.current.value = text; // הוספת עדכון ערך הטקסט ישירות
+      textareaRef.current.selectionStart = cursorPosition[0];
+      textareaRef.current.selectionEnd = cursorPosition[1];
     }
-  }, [cursorPosition, text]);
+  }, [text, cursorPosition]);
 
   const textareaStyle = {
     fontFamily: textFormat.font,
     fontSize: textFormat.size,
     color: textFormat.color
   };
-
 
   return (
     <div className="text-editor">
@@ -51,7 +46,6 @@ const TextEditor = ({
         placeholder="Type something here..."
         style={textareaStyle}
       ></textarea>
-
     </div>
   );
 };
