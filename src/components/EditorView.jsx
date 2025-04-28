@@ -11,8 +11,8 @@ const splitter = new GraphemeSplitter();
 const EditorView = ({ username }) => {
   const [openEditors, setOpenEditors] = useState([]);
   const [userFiles, setUserFiles] = useState([]);
-  const [language, setLanguage] = useState('EN');
-  const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
+  //const [language, setLanguage] = useState('EN');
+  //const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
   const [focusedEditorId, setFocusedEditorId] = useState(null);
   
   // טעינת הקבצים של המשתמש
@@ -44,12 +44,13 @@ const EditorView = ({ username }) => {
   };
   
   
-
+//שולף קבצים קיימים מה-localStorage לפי משתמש
   const refreshUserFiles = () => {
     const files = FileManager.loadUserFiles(username);
     setUserFiles(files);
   };
 
+  //פתיחת קובץ לעריכה
   const handleEditFile = (fileId) => {
     const existingEditor = openEditors.find(e => e.id === fileId);
     if (!existingEditor) {
@@ -68,6 +69,8 @@ const EditorView = ({ username }) => {
     setFocusedEditorId(fileId);
   };
 
+
+  //שינוי שם
   const handleUpdateText = (fileId, newText) => {
     setOpenEditors(prevEditors =>
       prevEditors.map(editor =>
@@ -76,6 +79,8 @@ const EditorView = ({ username }) => {
     );
   };
 
+  
+  //עדכון טקסט או פורמט
   const handleUpdateFormat = (fileId, newFormat) => {
     setOpenEditors(prevEditors =>
       prevEditors.map(editor =>
@@ -83,7 +88,8 @@ const EditorView = ({ username }) => {
       )
     );
   };
-
+  
+  //שינוי שם
   const handleRenameFile = (fileId, newName) => {
     setOpenEditors(prevEditors =>
       prevEditors.map(editor =>
@@ -91,6 +97,7 @@ const EditorView = ({ username }) => {
       )
     );
   };
+
 
   const handleCursorChange = (fileId, newSelectionStart, newSelectionEnd) => {
     setOpenEditors(prevEditors =>
@@ -103,14 +110,8 @@ const EditorView = ({ username }) => {
     setFocusedEditorId(fileId);
   };
 
-  const handleUpdateEditor = (fileId, updates) => {
-    setOpenEditors(prevEditors =>
-      prevEditors.map(editor =>
-        editor.id === fileId ? { ...editor, ...updates } : editor
-      )
-    );
-  };
 
+//שמירה לקובץ
   const handleSaveFile = (fileId) => {
     const editor = openEditors.find(e => e.id === fileId);
     if (editor) {
@@ -123,6 +124,8 @@ const EditorView = ({ username }) => {
       alert('File saved successfully!');
     }
   };
+
+
 
   const insertCharToFocusedEditor = (char) => {
     setOpenEditors(prevEditors => {
@@ -162,6 +165,7 @@ const EditorView = ({ username }) => {
         return editor;
       });
 
+
       // עידכון קורסור אחרי שמירה
       setTimeout(() => {
         handleCursorChange(focusedEditorId, newCursorPos, newCursorPos);
@@ -172,6 +176,7 @@ const EditorView = ({ username }) => {
   };
 
 
+  //סגירה ומחיקה של עורך
   const handleCloseEditor = (editorId) => {
     setOpenEditors(prevEditors => prevEditors.filter(editor => editor.id !== editorId));
   };
@@ -204,27 +209,25 @@ const EditorView = ({ username }) => {
         <div className="editor-main">
           {openEditors.map(editor => (
             <TextEditorArea
-            key={editor.id}
-            id={editor.id}
-            text={editor.text}
-            setText={(newText) => handleUpdateText(editor.id, newText)}
-              cursorPosition={[editor.selectionStart, editor.selectionEnd]}
-              setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
-              textFormat={editor.textFormat}
-              handleFormatChange={(field, value) => handleUpdateFormat(editor.id, { [field]: value })}
-              fileName={editor.name}
-              onRenameFile={(newName) => handleRenameFile(editor.id, newName)}
-              onSave={() => handleSaveFile(editor.id)}
-              onClose={() => handleCloseEditor(editor.id)}
-              onDelete={() => handleDeleteFile(editor.id)}
+                key={editor.id}
+                id={editor.id}
+                text={editor.text}
+                setText={(newText) => handleUpdateText(editor.id, newText)}
+                  cursorPosition={[editor.selectionStart, editor.selectionEnd]}
+                  setCursorPosition={(pos) => handleCursorChange(editor.id, pos[0], pos[1])}
+                  textFormat={editor.textFormat}
+                  handleFormatChange={(field, value) => handleUpdateFormat(editor.id, { [field]: value })}
+                  fileName={editor.name}
+                  onRenameFile={(newName) => handleRenameFile(editor.id, newName)}
+                  onSave={() => handleSaveFile(editor.id)}
+                  onClose={() => handleCloseEditor(editor.id)}
+                  onDelete={() => handleDeleteFile(editor.id)}
             />
           ))}
 
           <div className="keyboard-area">
             <VirtualKeyboard
               onCharClick={(char) => insertCharToFocusedEditor(char)}
-              language={language}
-              showEmojis={showEmojiKeyboard}
             />
           </div>
         </div>

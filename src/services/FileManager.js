@@ -82,18 +82,18 @@ class FileManager {
     }
 
      // אם לא קיים - יוצרים
-  users[username].files[fileName] = {
-    name: fileName,
-    content: '',
-    format: {
-      font: 'Arial',
-      size: '16px',
-      color: 'black',
-      bold: false,
-      italic: false,
-      underline: false,
-      align: 'left'
-    }
+    users[username].files[fileName] = {
+      name: fileName,
+      content: '',
+      format: {
+        font: 'Arial',
+        size: '16px',
+        color: 'black',
+        bold: false,
+        italic: false,
+        underline: false,
+        align: 'left'
+      }
   };
 
   localStorage.setItem('users', JSON.stringify(users));
