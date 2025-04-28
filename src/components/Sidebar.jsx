@@ -23,6 +23,14 @@ const Sidebar = ({ username, openFiles, onEditFile }) => {
                 </button>
             </div>
         ))}
+
+        <div className="add-file-button-container">
+            <button className="add-file-button" onClick={() => onEditFile()}>
+              + 
+            </button>
+        </div>
+
+
       </div>
 
     </div>

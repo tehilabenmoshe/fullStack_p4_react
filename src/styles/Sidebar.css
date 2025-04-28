@@ -54,9 +54,10 @@
     padding-top: 8px;
     padding-bottom: 8px;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #f1e3f9;
     margin-top:20px
   }
+
   
   .file-name {
     flex: 1;
@@ -74,5 +75,30 @@
     cursor: pointer;
     font-weight: thin;
     font-size: 14px;
+  }
+
+  .edit-button:hover {
+    background-color: #36224f;
+    
+  }
+  
+  .add-file-button-container {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .add-file-button {
+    background-color: transparent;
+    color: #5c3887;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 13px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .add-file-button:hover {
+    background-color: #f1e3f9;
   }
   
