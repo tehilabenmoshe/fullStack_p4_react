@@ -16,6 +16,8 @@ const EditorView = ({ username }) => {
       name: 'New Text',
       text: '',
       cursorPosition: 0,
+      selectionStart: 0,
+      selectionEnd: 0,
       textFormat: {
         font: 'Arial',
         size: '16px',
@@ -27,6 +29,7 @@ const EditorView = ({ username }) => {
       }
     }
   ]);
+  
 
   const [language, setLanguage] = useState('EN');
   const [showEmojiKeyboard, setShowEmojiKeyboard] = useState(false);
@@ -43,31 +46,45 @@ const EditorView = ({ username }) => {
       prevEditors.map(editor => {
         if (editor.id === focusedEditorId) {
           let updatedText;
-          let newCursorPos = editor.cursorPosition;
-
+          let newCursorPos;
+          const { selectionStart, selectionEnd, text } = editor;
+  
           if (char === 'BACKSPACE') {
-            if (editor.cursorPosition > 0) {
-              const left = splitter.splitGraphemes(editor.text.slice(0, editor.cursorPosition));
-              const right = splitter.splitGraphemes(editor.text.slice(editor.cursorPosition));
+            if (selectionStart !== selectionEnd) {
+              // יש בחירה - מוחקים את הבחירה
+              updatedText = text.slice(0, selectionStart) + text.slice(selectionEnd);
+              newCursorPos = selectionStart;
+            } else if (selectionStart > 0) {
+              // אין בחירה - מוחקים תו אחורה
+              const left = splitter.splitGraphemes(text.slice(0, selectionStart));
+              const right = splitter.splitGraphemes(text.slice(selectionStart));
               left.pop();
               updatedText = left.join('') + right.join('');
               newCursorPos = left.join('').length;
             } else {
-              updatedText = editor.text;
+              updatedText = text;
+              newCursorPos = 0;
             }
           } else {
-            const before = editor.text.slice(0, editor.cursorPosition);
-            const after = editor.text.slice(editor.cursorPosition);
-            updatedText = before + char + after;
-            newCursorPos = editor.cursorPosition + char.length;
+            // יש תו חדש -> נחליף את הבחירה
+            updatedText = text.slice(0, selectionStart) + char + text.slice(selectionEnd);
+            newCursorPos = selectionStart + char.length;
           }
-
-          return { ...editor, text: updatedText, cursorPosition: newCursorPos };
+  
+          return {
+            ...editor,
+            text: updatedText,
+            cursorPosition: newCursorPos,
+            selectionStart: newCursorPos,
+            selectionEnd: newCursorPos
+          };
         }
         return editor;
       })
     );
   };
+  
+  
 
   const handleUpdateText = (fileId, newText) => {
     setOpenEditors(prevEditors =>
@@ -77,14 +94,17 @@ const EditorView = ({ username }) => {
     );
   };
 
-  const handleCursorChange = (fileId, newCursorPosition) => {
+  const handleCursorChange = (fileId, newSelectionStart, newSelectionEnd) => {
     setOpenEditors(prevEditors =>
       prevEditors.map(editor =>
-        editor.id === fileId ? { ...editor, cursorPosition: newCursorPosition } : editor
+        editor.id === fileId
+          ? { ...editor, selectionStart: newSelectionStart, selectionEnd: newSelectionEnd }
+          : editor
       )
     );
     setFocusedEditorId(fileId);
   };
+  
 
   const handleEditFile = (fileId) => {
     // כאן את אמורה לטעון מקובץ, אני מניח שאת מסודרת עם localStorage.

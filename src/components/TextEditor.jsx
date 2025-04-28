@@ -14,9 +14,9 @@ const TextEditor = ({
   const textareaRef = useRef(null);
 
   const handleCursorChange = (e) => {
-    const newPos = e.target.selectionStart;
-    setCursorPosition(newPos);
+    setCursorPosition([e.target.selectionStart, e.target.selectionEnd]);
   };
+  
 
   const handleInputChange = (e) => {
     setText(e.target.value);
