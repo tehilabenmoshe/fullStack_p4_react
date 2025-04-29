@@ -1,14 +1,12 @@
 import React from 'react';
-import GraphemeSplitter from 'grapheme-splitter';
-const splitter = new GraphemeSplitter();
 
 const TextEditor = ({ 
   text, 
   setText, 
-  cursorPosition, 
   setCursorPosition, 
   textFormat
 }) => {
+  // Update the cursor position in text
   const handleCursorChange = (e) => {
     setCursorPosition([e.target.selectionStart, e.target.selectionEnd]);
   };
@@ -17,15 +15,6 @@ const TextEditor = ({
     setText(e.target.value);
     setCursorPosition([e.target.selectionStart, e.target.selectionEnd]);
   };
-
-  // // כל פעם שהטקסט או המיקום משתנה -> לסדר את הסמן
-  // useEffect(() => {
-  //   if (textareaRef.current) {
-  //     textareaRef.current.value = text; // הוספת עדכון ערך הטקסט ישירות
-  //     textareaRef.current.selectionStart = cursorPosition[0];
-  //     textareaRef.current.selectionEnd = cursorPosition[1];
-  //   }
-  // }, [text, cursorPosition]);
 
   const textareaStyle = {
     fontFamily: textFormat.font,

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const TextDisplay = ({ text, textFormat, searchQuery = '', onSearchChange }) => {
+  // The design of the text display area
   const displayStyle = {
     fontFamily: textFormat.font,
     fontSize: textFormat.size,
@@ -28,6 +29,7 @@ const TextDisplay = ({ text, textFormat, searchQuery = '', onSearchChange }) => 
         type="text" 
         placeholder="חפש תו או טקסט..." 
         value={searchQuery}
+        // When the user types, call it with the new value
         onChange={(e) => onSearchChange(e.target.value)}
         className="search-input"
       />
