@@ -44,7 +44,7 @@ const EditorView = ({ username }) => {
   };
   
   
-//שולף קבצים קיימים מה-localStorage לפי משתמש
+  //שולף קבצים קיימים מה-localStorage לפי משתמש
   const refreshUserFiles = () => {
     const files = FileManager.loadUserFiles(username);
     setUserFiles(files);
